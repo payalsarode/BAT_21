@@ -21,6 +21,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pageObject.AddNewCustomerPage;
 import pageObject.AdminPage;
+import pageObject.VendorPage;
 import utilities.ReadConfig;
 
 public class StepDefination extends Base {
@@ -137,6 +138,34 @@ public class StepDefination extends Base {
 	public void user_can_view_confirmation_page(String string) throws Exception {
 	    Assert.assertTrue(driver.findElement(By.tagName("Body")).getText().contains("The new customer has been added successfully."));
 	    Thread.sleep(2000);
+	}
+	
+	//vendors
+
+	@When("User click on vendor item")
+	public void user_click_on_vendor_item() throws Exception {
+	   vendor = new VendorPage(driver);
+	   vendor.clickOnvendors();
+	   Thread.sleep(2000);
+	}
+
+	@Then("User can view vendor page")
+	public void user_can_view_vendor_page() throws Exception {
+		Assert.assertEquals("Vendors / nopCommerce administration", vendor.getPageTitle());
+		Thread.sleep(2000);
+	}
+
+	@When("User enter Vendor name as {string} and password as {string}")
+	public void user_enter_vendor_name_as_and_password_as(String Vendorname, String Vendoremail) throws Exception {
+	   vendor.SearchEmail(Vendoremail);
+	   vendor.SearchName(Vendorname);
+		Thread.sleep(2000);
+	}
+
+	@When("User click on Search button")
+	public void user_click_on_search_button() throws Exception {
+	 vendor.ClickOnSearchbutton();
+		Thread.sleep(2000);
 	}
 
 
